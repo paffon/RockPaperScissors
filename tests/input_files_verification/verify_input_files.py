@@ -1,15 +1,18 @@
 from pandas import DataFrame
 from typing import List, Tuple
 
+
 def assert_no_duplicates(elements: List[str], message: str):
     if len(elements) != len(set(elements)):
         duplicates = {x for x in elements if elements.count(x) > 1}
         raise AssertionError(f"{message} {duplicates}")
 
+
 def assert_all_included(elements: List[str], pool: List[str], message: str):
     if not all([x in pool for x in elements]):
         missing = {x for x in elements if x not in pool}
         raise AssertionError(f"{message} {missing} Allowed: {pool}")
+
 
 def validate_short_names(short_names: List[Tuple[str, str]]):
     # verify no duplicates in short_names
@@ -53,6 +56,7 @@ def validate_relationship(short_names: List[str], relationship: DataFrame):
         bad_values: List[int] = [x for x in all_values if x not in allowed_values]
         raise AssertionError(f'relationship.csv: found bad values {bad_values}.'
                              f' Allowed values: {allowed_values}')
+
 
 def validate_input(short_names: List[Tuple[str, str]], relationship: DataFrame):
     validate_short_names(short_names)
