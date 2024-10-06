@@ -42,8 +42,8 @@ class RPSLogic:
         Initializes RPSLogic by loading weapon names and relationships from external files.
         """
         # Paths to the input files for weapon names and their relationships
-        short_names_path = os.path.join('..', 'data', 'short_names.json')
-        relationship_path = os.path.join('..', 'data', 'relationship.csv')
+        short_names_path = os.path.join('data', 'short_names.json')
+        relationship_path = os.path.join('data', 'relationship.csv')
 
         # Load weapon names from the JSON file
         with open(short_names_path, 'r', encoding='utf-8') as f:

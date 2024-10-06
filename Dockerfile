@@ -4,6 +4,9 @@ FROM python:3.8-slim
 # Set the working directory in the container
 WORKDIR /app
 
+# Set PYTHONPATH to current directory (this tells Python where to look for modules)
+ENV PYTHONPATH=/app
+
 # Copy the requirements file into the container
 COPY requirements.txt .
 
