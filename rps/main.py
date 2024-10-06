@@ -1,3 +1,4 @@
+from rps.asset_manager import AssetManager
 from rps.exceptions import FailedGameException
 from rps.game import Game
 from rps.player import HumanPlayer, ComputerPlayer
@@ -10,6 +11,9 @@ def main():
     Initializes the game logic, creates players (human and computer),
     and starts the game. Catches and handles any game failure exceptions.
     """
+    # Displaying the game title from the assets (external text file)
+    print(AssetManager().get_asset('game_title.txt'))
+
     # Initialize Rock-Paper-Scissors logic (comparison rules, weapon names, etc.)
     rps_logic = RPSLogic()
 

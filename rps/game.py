@@ -44,8 +44,6 @@ class Game:
         Starts and manages the overall game for the specified number of rounds.
         Prints the game title asset and iterates over rounds, calling the method to play each round.
         """
-        # Displaying the game title from the assets (external text file)
-        print(AssetManager().get_asset('game_title.txt'))
 
         # Looping through the number of rounds and playing each one
         for round_number in range(1, self.num_rounds + 1):
