@@ -1,9 +1,25 @@
-from abc import ABC, abstractmethod
+"""
+This module defines the player classes for the Rock-Paper-Scissors game, including both human and
+computer players.
 
-from rps.exceptions import MaxAttemptsExceededError, FailedWeaponChoiceException
+It provides the following functionality:
+- An abstract base class `Player`, which sets up the structure for any player in the game,
+ including name, strategy, and score.
+- Concrete implementations of players:
+    - `HumanPlayer`: A human player that selects weapons based on user input.
+    - `ComputerPlayer`: A computer player that selects weapons randomly.
+
+The module interacts with the following external components:
+- `RPSLogic`: Game logic for comparing weapons and determining the winner.
+- `Strategy`: Defines how a player chooses their weapon (e.g., via user input or randomly).
+- `UserInputStrategy`, `RandomStrategy`: Specific strategies for selecting a weapon.
+- Custom exceptions for handling invalid inputs or too many failed attempts.
+"""
+
+from abc import ABC
+
 from rps.rps_logic import RPSLogic
 from rps.strategy import Strategy, UserInputStrategy, RandomStrategy
-from rps.user_input import get_user_input_with_verification, verify_positive_integer
 
 
 class Player(ABC):
@@ -30,7 +46,7 @@ class Player(ABC):
         self.rps_logic = rps_logic  # Game logic is required for strategy execution
         self.score = 0  # Initialize the player's score to 0
 
-    def choose(self, *args, **kwargs) -> str:
+    def choose(self) -> str:
         """
         Selects a weapon based on the player's strategy.
 

@@ -1,24 +1,42 @@
-from rps.asset_manager import AssetManager
-from rps.exceptions import FailedWeaponChoiceException, FailedGameException, MaxAttemptsExceededError
+"""
+This module implements a Rock-Paper-Scissors game through the Game class, handling player
+ interaction, game logic, and round management.
+
+It provides the following functionality:
+- Initialization of the game with two players and the logic for weapon comparison.
+- Verification of the number of rounds via user input.
+- Management of individual game rounds, including weapon selection and result calculation.
+- Handling and raising specific game-related exceptions when errors occur, such as invalid weapon
+  choices or failed game execution.
+
+The Game class interacts with external modules to verify user inputs and handles custom exceptions
+for game flow control.
+"""
+
+from rps.exceptions import (FailedWeaponChoiceException, FailedGameException,
+                            MaxAttemptsExceededError)
 from rps.user_input import get_user_input_with_verification, verify_positive_integer
 
 
 class Game:
     """
-    Represents a Rock-Paper-Scissors game between two players. The game can be played for a specified
-    number of rounds, and the winner is determined by comparing players' weapon choices in each round.
+    Represents a Rock-Paper-Scissors game between two players. The game can be played for a
+    specified number of rounds, and the winner is determined by comparing players' weapon choices
+    in each round.
 
     Attributes:
-        player1: The first player in the game, which must have a 'choose' method for weapon selection and 'name', 'score' attributes.
+        player1: The first player in the game, which must have a 'choose' method for weapon
+         selection and 'name', 'score' attributes.
         player2: The second player in the game, similar to player1 in structure.
-        rps_logic: Logic that determines the winner based on weapon choices, including a comparison method and weapon names.
+        rps_logic: Logic that determines the winner based on weapon choices, including a comparison
+         method and weapon names.
         num_rounds (int): The number of rounds to be played, provided by the user.
     """
 
     def __init__(self, player1, player2, rps_logic):
         """
-        Initializes the Game with two players and the logic for comparing Rock-Paper-Scissors choices.
-        Asks the user to input the number of rounds, verified by a method.
+        Initializes the Game with two players and the logic for comparing Rock-Paper-Scissors
+         choices. Asks the user to input the number of rounds, verified by a method.
 
         :param player1: First player object.
         :param player2: Second player object.
@@ -42,7 +60,8 @@ class Game:
     def play_game(self):
         """
         Starts and manages the overall game for the specified number of rounds.
-        Prints the game title asset and iterates over rounds, calling the method to play each round.
+        Prints the game title asset and iterates over rounds, calling the method to play each
+         round.
         """
 
         # Looping through the number of rounds and playing each one
@@ -61,7 +80,7 @@ class Game:
         :raises FailedGameException: If any player makes an invalid weapon choice.
         """
         try:
-            # Each player chooses their weapon (the 'choose' method is implemented in player objects)
+            # Each player chooses a weapon (the 'choose' method is implemented in player objects)
             weapon1 = self.player1.choose()
             weapon2 = self.player2.choose()
         except FailedWeaponChoiceException as e:
@@ -71,7 +90,7 @@ class Game:
         # Use rps_logic to determine the result: 0 for tie, 1 if player1 wins, -1 if player2 wins
         result: int = self.rps_logic.compare(weapon1, weapon2)
 
-        # Convert the weapon's short name (e.g., 'r', 'p', 's') to a full name ('Rock', 'Paper', 'Scissors')
+        # Convert the weapon's short name (e.g., 'r', 'p') to a full name ('Rock', 'Paper')
         weapon1_name: str = self.rps_logic.short_names_to_full_names[weapon1].capitalize()
         weapon2_name: str = self.rps_logic.short_names_to_full_names[weapon2].capitalize()
 
@@ -82,12 +101,13 @@ class Game:
         """
         Summarizes the result of a single round and updates players' scores.
 
-        :param result: The result of the round comparison (0 for tie, 1 if player1 wins, -1 if player2 wins).
+        :param result: The result of the comparison (0 - tie, 1 - player1 wins, 2 - player2 wins).
         :param weapon1_name: Full name of player1's chosen weapon.
         :param weapon2_name: Full name of player2's chosen weapon.
         """
         # Displaying the chosen weapons for both players
-        print(f'{self.player1.name} chose {weapon1_name}, {self.player2.name} chose {weapon2_name}.')
+        print(f'{self.player1.name} chose {weapon1_name},'
+              f' {self.player2.name} chose {weapon2_name}.')
 
         if result == 0:
             # If the result is a tie, announce it
@@ -110,7 +130,9 @@ class Game:
         """
         Returns the current scores of both players as a formatted string.
 
-        :return: A string representing the current score in the format "player1_name score1 - score2 player2_name".
+        :return: A string representing the current score in the format "player1_name score1 -
+         score2 player2_name".
         """
         # Formatting and returning the current scores as a string
-        return f'{self.player1.name} {self.player1.score} - {self.player2.score} {self.player2.name}'
+        return (f'{self.player1.name} {self.player1.score} - '
+                f'{self.player2.score} {self.player2.name}')

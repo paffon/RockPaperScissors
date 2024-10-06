@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  rps-app:
+    build: .
+    container_name: rps-app-container
+    image: rock-paper-scissors
+    stdin_open: true  # Keep stdin open for interactive mode
+    tty: true  # Allocate a pseudo-TTY
+    command: python rps/main.py
+    volumes:
+      - .:/app
+    working_dir: /app

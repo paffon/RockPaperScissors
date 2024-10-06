@@ -1,14 +1,34 @@
+"""
+This module defines various strategies for selecting a weapon in the Rock-Paper-Scissors game.
+
+It provides the following classes:
+- `Strategy`: An abstract base class for implementing different weapon selection strategies.
+- `RandomStrategy`: A strategy that selects a weapon randomly from the available options in
+ `RPSLogic`.
+- `UserInputStrategy`: A strategy that prompts the user to choose a weapon via input.
+
+The strategies interact with:
+- `RPSLogic` to access the available weapon options.
+- `get_user_input_with_verification` to validate user input when using `UserInputStrategy`.
+- Custom exceptions to handle invalid weapon choices or user input errors
+ (`FailedWeaponChoiceException` and `MaxAttemptsExceededError`).
+
+Each strategy implements the `execute` method to return a chosen weapon based on the specific
+ strategy's logic.
+"""
+
 import random
 from abc import ABC, abstractmethod
 
 from rps.exceptions import MaxAttemptsExceededError, FailedWeaponChoiceException
 from rps.rps_logic import RPSLogic
-from user_input import get_user_input_with_verification
+from rps.user_input import get_user_input_with_verification
 
 
 class Strategy(ABC):
     """
-    Abstract base class representing a strategy for selecting a weapon in the Rock-Paper-Scissors game.
+    Abstract base class representing a strategy for selecting a weapon in the Rock-Paper-Scissors
+     game.
 
     Attributes:
         name (str): The name of the strategy.
@@ -23,13 +43,12 @@ class Strategy(ABC):
         self.name = strategy_name
 
     @abstractmethod
-    def execute(self, *args, **kwargs) -> str:
+    def execute(self, game_logic: RPSLogic) -> str:
         """
         Abstract method to execute the strategy. Must be implemented by all subclasses.
 
         :return: The chosen weapon as a string.
         """
-        pass
 
 
 class RandomStrategy(Strategy):
@@ -71,7 +90,8 @@ class UserInputStrategy(Strategy):
 
         :param game_logic: The game logic containing weapon options and names.
         :return: The user's chosen weapon as a string.
-        :raises FailedWeaponChoiceException: If the user fails to provide a valid input after multiple attempts.
+        :raises FailedWeaponChoiceException: If the user fails to provide a valid input after
+         multiple attempts.
         """
         # Formatting the weapon options for user display
         separator: str = '\n\t'

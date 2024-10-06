@@ -1,3 +1,25 @@
+"""
+This module provides functions for handling and verifying user input in the Rock-Paper-Scissors
+ game.
+
+It includes:
+- `get_user_input_with_verification`: Prompts the user for input, verifies the input based on
+ provided options or a custom verification method, and enforces a maximum number of attempts.
+- `verify_user_input`: Validates the user's input against a list of valid options or a custom
+ verification function.
+- `verify_positive_integer`: A specific verification method that checks if the input is a positive
+ integer.
+
+The module raises the following exceptions:
+- `InvalidInputError`: Raised when the user's input does not match the expected options or fails
+ verification.
+- `MaxAttemptsExceededError`: Raised when the user exceeds the maximum allowed number of attempts
+ to provide valid input.
+
+These functions are designed to provide robust user input handling and validation for various
+ game-related interactions.
+"""
+
 from rps.exceptions import InvalidInputError, MaxAttemptsExceededError
 
 
@@ -16,7 +38,8 @@ def get_user_input_with_verification(message: str, options: list = None,
     :param verification_method: A callable that verifies the user input.
     :param attempts: Number of attempts the user has to provide valid input.
     :return: The user's valid input.
-    :raises MaxAttemptsExceededError: If the user fails to provide valid input within the allowed number of attempts.
+    :raises MaxAttemptsExceededError: If the user fails to provide valid input within the allowed
+     number of attempts.
     """
     attempts_left_warning: str = ''  # Warning message indicating remaining attempts
 
@@ -47,9 +70,11 @@ def verify_user_input(user_input: str, options: list = None,
 
     :param user_input: The user's input to verify.
     :param options: A list of valid options to check user input against.
-    :param verification_method: A callable that verifies the input (e.g., a function that checks if input is an integer).
+    :param verification_method: A callable that verifies the input (e.g., a function that checks if
+     input is an integer).
     :return: True if the input is valid.
-    :raises InvalidInputError: If the input is not valid based on the options or verification method.
+    :raises InvalidInputError: If the input is not valid based on the options or verification
+     method.
     """
     # Check if input is one of the provided options
     if options and user_input not in options:
