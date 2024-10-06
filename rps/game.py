@@ -1,56 +1,64 @@
-from assets_manager import AssetManager
-from exceptions import MaxAttemptsExceededError
+from typing import Tuple
+
+from rps.asset_manager import AssetManager
+from rps.exceptions import FailedWeaponChoiceException, FailedGameException, MaxAttemptsExceededError
+from rps.user_input import get_user_input_with_verification, verify_positive_integer
+
 
 class Game:
-    def __init__(self, num_rounds, player1, player2, rps_logic):
-        self.num_rounds = num_rounds
+    def __init__(self, player1, player2, rps_logic):
         self.player1 = player1
         self.player2 = player2
         self.rps_logic = rps_logic
 
-    def reset_game(self):
-        self.player1.score = 0
-        self.player2.score = 0
+        try:
+            self.num_rounds: int = int(get_user_input_with_verification(
+                message='Enter the number of rounds: ',
+                verification_method=verify_positive_integer
+            ))
+        except MaxAttemptsExceededError as e:
+            raise FailedGameException('Invalid number of rounds.') from e
 
-    def play(self):
-        asset_manager = AssetManager('assets')
-        for round_num in range(1, self.num_rounds + 1):
-            print(f"\nRound {round_num}")
-            try:
-                move1 = self.player1.make_move()
-                move2 = self.player2.make_move()
-            except MaxAttemptsExceededError as e:
-                print(e)
-                return
+    def play_game(self):
+        print(AssetManager().get_asset('game_title.txt'))
 
-            result = self.rps_logic.determine_winner(move1, move2)
+        for round_number in range(1, self.num_rounds + 1):
+            print(f'\n---------\nRound {round_number} / {self.num_rounds}\n')
+            self.play_one_round()
 
-            print(f"{self.player1.name} chose {move1}")
-            move1_art = asset_manager.get_asset(f"{move1}.txt")
-            if move1_art:
-                print(move1_art)
+        print(f'Final score: {self.get_scores_as_str()}')
 
-            print(f"{self.player2.name} chose {move2}")
-            move2_art = asset_manager.get_asset(f"{move2}.txt")
-            if move2_art:
-                print(move2_art)
 
-            if result == 'win':
-                print(f"{self.player1.name} wins this round!")
-                self.player1.score += 1
-            elif result == 'lose':
-                print(f"{self.player2.name} wins this round!")
-                self.player2.score += 1
-            else:
-                print("This round is a tie!")
+    def play_one_round(self):
+        try:
+            weapon1 = self.player1.choose()
+            weapon2 = self.player2.choose()
+        except FailedWeaponChoiceException as e:
+            raise FailedGameException(f'Invalid weapon choice: ({e})') from e
 
-            print(f"Scores => {self.player1.name}: {self.player1.score}, {self.player2.name}: {self.player2.score}")
+        result: int = self.rps_logic.compare(weapon1, weapon2)
 
-        # After all rounds
-        print("\nGame Over!")
-        if self.player1.score > self.player2.score:
-            print(f"{self.player1.name} wins the game!")
-        elif self.player1.score < self.player2.score:
-            print(f"{self.player2.name} wins the game!")
+        weapon1_name: str = self.rps_logic.short_names_to_full_names[weapon1].capitalize()
+        weapon2_name: str = self.rps_logic.short_names_to_full_names[weapon2].capitalize()
+
+        self.summarize_round(result, weapon1_name, weapon2_name)
+
+    def summarize_round(self, result, weapon1_name, weapon2_name):
+
+        print(f'{self.player1.name} chose {weapon1_name}, {self.player2.name} chose {weapon2_name}.')
+
+        if result == 0:
+            print(f'Tie! Both players chose {weapon1_name}.')
+
+        elif result == 1:
+            self.player1.score += 1
+            print(f'{weapon1_name} beats {weapon2_name}. {self.player1.name} wins!')
+
         else:
-            print("The game is a tie!")
+            self.player2.score += 1
+            print(f'{weapon2_name} beats {weapon1_name}. {self.player2.name} wins!')
+
+        print(self.get_scores_as_str())
+
+    def get_scores_as_str(self):
+        return f'{self.player1.name} {self.player1.score} - {self.player2.score} {self.player2.name}'

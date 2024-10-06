@@ -1,4 +1,4 @@
-from rps2.exceptions import InvalidInputError, MaxAttemptsExceededError
+from rps.exceptions import InvalidInputError, MaxAttemptsExceededError
 
 
 def get_user_input_with_verification(message: str, options: list = None,

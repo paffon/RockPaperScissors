@@ -1,49 +1,40 @@
-import csv
 import json
-from enum import Enum
+import os
+import pandas as pd
+
+from tests.input_files_verification.verify_input_files import validate_input
+
+import numpy as np
+
 
 class RPSLogic:
-    def __init__(self, short_names_file, relationships_file):
-        self.short_names_file = short_names_file
-        self.relationships_file = relationships_file
-        self.weapons = []
-        self.short_names = {}
-        self.relationships = {}
-        self.weapon_enum = None
-        self.load_weapons()
-        self.load_relationships()
-        self.create_weapon_enum()
+    def __init__(self):
 
-    def load_weapons(self):
-        with open(self.short_names_file, 'r') as f:
-            data = json.load(f)
-            self.short_names = {item[0]: item[1] for item in data}
-            self.weapons = list(set(self.short_names.values()))
+        short_names_path = os.path.join('..', 'data', 'short_names.json')
+        relationship_path = os.path.join('..', 'data', 'relationship.csv')
 
-    def load_relationships(self):
-        with open(self.relationships_file, 'r') as f:
-            reader = csv.reader(f)
-            header = next(reader)[1:]  # Skip index column
-            for row in reader:
-                weapon = row[0]
-                results = row[1:]
-                self.relationships[weapon] = dict(zip(header, results))
+        # Load weapon names from the JSON file
+        with open(short_names_path, 'r') as f:
+            self.names_tuples = json.load(f)
 
-    def create_weapon_enum(self):
-        self.weapon_enum = Enum('Weapon', {name: name for name in self.weapons})
+        # Load weapon relationships from the CSV file into a DataFrame
+        self.relationship = pd.read_csv(relationship_path, index_col=0)
 
-    def determine_winner(self, weapon1_name, weapon2_name):
-        if weapon1_name not in self.relationships or weapon2_name not in self.relationships[weapon1_name]:
-            raise ValueError("Invalid weapons for determining winner.")
-        result = self.relationships[weapon1_name][weapon2_name]
-        if result == '0':
-            return 'tie'
-        elif result == '1':
-            return 'win'
-        elif result == '2':
-            return 'lose'
-        else:
-            raise ValueError("Invalid result in relationships")
+        # Validate the loaded data to ensure correctness
+        validate_input(self.names_tuples, self.relationship)
 
-    def get_weapon_enum(self):
-        return self.weapon_enum
+        # Create a dictionary mapping short names to full names for convenience
+        self.short_names_to_full_names = {short: full for short, full in self.names_tuples}
+        self.options = [short for short, full in self.names_tuples]
+
+    def compare(self, weapon1: str, weapon2: str) -> int:
+        """
+        0 tie, 1 first weapon wins, 2 second weapon wins
+        :param weapon1:
+        :param weapon2:
+        :return:
+        """
+        return self.relationship.loc[weapon1, weapon2]
+
+    def random(self) -> str:
+        return np.random.choice(self.options)

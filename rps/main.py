@@ -1,51 +1,19 @@
-from strategies import UserInputStrategy, RandomStrategy
-from players import Human, Computer
-from rps_logic import RPSLogic
-from game import Game
-from assets_manager import AssetManager
-from exceptions import MaxAttemptsExceededError
+from rps.exceptions import FailedGameException
+from rps.game import Game
+from rps.player import HumanPlayer, ComputerPlayer
+from rps.rps_logic import RPSLogic
+
 
 def main():
-    # Initialize RPSLogic
-    rps_logic = RPSLogic('../data/short_names.json', '../data/relationship.csv')
+    rps_logic = RPSLogic()
+    human = HumanPlayer(rps_logic=rps_logic)
+    computer = ComputerPlayer(rps_logic=rps_logic)
+    try:
+        game = Game(human, computer, rps_logic)
+        game.play_game()
+    except FailedGameException as e:
+        print(f'Sorry, but the game could not complete: "{e}" The game ends now.')
 
-    # Get the weapons and short names
-    weapons = rps_logic.weapons
-    short_names = rps_logic.short_names
 
-    # Initialize strategies
-    user_strategy =
-    computer_strategy =
-
-    # Create players
-    human = Human("You", UserInputStrategy(weapons, short_names))
-    computer = Computer("Computer", RandomStrategy(weapons))
-
-    # Display game title
-    asset_manager = AssetManager('../assets')
-    game_title = asset_manager.get_asset('game_title.txt')
-    if game_title:
-        print(game_title)
-    else:
-        print("Let's play Rock Paper Scissors!")
-
-    # Get number of rounds from user
-    attempts_left = 3
-    while attempts_left > 0:
-        num_rounds_input = input("Enter the number of rounds you want to play: ")
-        if num_rounds_input.isdigit() and int(num_rounds_input) > 0:
-            num_rounds = int(num_rounds_input)
-            break
-        else:
-            attempts_left -= 1
-            print(f"Invalid input. You have {attempts_left} attempts left.")
-    else:
-        print("Maximum attempts exceeded.")
-        return
-
-    # Create and play game
-    game = Game(num_rounds, human, computer, rps_logic)
-    game.play()
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

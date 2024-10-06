@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 
-from rps2.exceptions import MaxAttemptsExceededError, FailedWeaponChoiceException
-from rps2.rps_logic import RPSLogic
-from rps2.strategy import Strategy, UserInputStrategy, RandomStrategy
-from rps2.user_input import get_user_input_with_verification, verify_positive_integer
+from rps.exceptions import MaxAttemptsExceededError, FailedWeaponChoiceException
+from rps.rps_logic import RPSLogic
+from rps.strategy import Strategy, UserInputStrategy, RandomStrategy
+from rps.user_input import get_user_input_with_verification, verify_positive_integer
 
 
 class Player(ABC):
