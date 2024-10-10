@@ -1,18 +1,6 @@
 """
 This module defines various strategies for selecting a weapon in the Rock-Paper-Scissors game.
 
-It provides the following classes:
-- `Strategy`: An abstract base class for implementing different weapon selection strategies.
-- `RandomStrategy`: A strategy that selects a weapon randomly from the available options in
- `RPSLogic`.
-- `UserInputStrategy`: A strategy that prompts the user to choose a weapon via input.
-
-The strategies interact with:
-- `RPSLogic` to access the available weapon options.
-- `get_user_input_with_verification` to validate user input when using `UserInputStrategy`.
-- Custom exceptions to handle invalid weapon choices or user input errors
- (`FailedWeaponChoiceException` and `MaxAttemptsExceededError`).
-
 Each strategy implements the `execute` method to return a chosen weapon based on the specific
  strategy's logic.
 """

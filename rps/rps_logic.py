@@ -1,18 +1,6 @@
 """
 This module defines the RPSLogic class, which encapsulates the logic for determining the outcome of
 a Rock-Paper-Scissors-like game.
-
-It provides the following functionality:
-- Loading and validating weapon names and their relationships from external JSON and CSV files.
-- Storing the relationships between weapons in a DataFrame, which is used to compare weapons.
-- Mapping short weapon names (e.g., 'r') to full names (e.g., 'Rock').
-- Comparing two weapons to determine the winner.
-
-External dependencies include:
-- Pandas for managing weapon relationships in a DataFrame.
-- JSON for loading weapon names from an external configuration file.
-- ConfigurationError for handling invalid input data.
-- validate_config_files_input for ensuring the correctness of the loaded files.
 """
 
 import json

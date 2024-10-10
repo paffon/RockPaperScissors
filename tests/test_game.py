@@ -1,14 +1,5 @@
 """
 This module contains unit tests for the Game class in the Rock-Paper-Scissors game.
-
-The tests cover the following scenarios:
-- Initializing the game with a valid number of rounds.
-- Handling invalid input during game initialization.
-- Simulating a single round where player1 wins, player2 wins, or there is a tie.
-- Handling an invalid weapon choice during a round.
-
-Mocks are used to simulate player choices and user input without requiring actual gameplay
- interaction.
 """
 
 import unittest

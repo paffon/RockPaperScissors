@@ -2,13 +2,6 @@
 This module implements a Rock-Paper-Scissors game through the Game class, handling player
  interaction, game logic, and round management.
 
-It provides the following functionality:
-- Initialization of the game with two players and the logic for weapon comparison.
-- Verification of the number of rounds via user input.
-- Management of individual game rounds, including weapon selection and result calculation.
-- Handling and raising specific game-related exceptions when errors occur, such as invalid weapon
-  choices or failed game execution.
-
 The Game class interacts with external modules to verify user inputs and handles custom exceptions
 for game flow control.
 """

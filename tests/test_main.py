@@ -1,12 +1,5 @@
 """
 This module contains unit tests for the main module of the Rock-Paper-Scissors game.
-
-The tests cover the following scenarios:
-- Successfully running the game, ensuring that the game initializes and runs without errors.
-- Handling a failure in the game due to a custom exception (FailedGameException).
-
-Mocks are used to simulate the behavior of the RPSLogic, AssetManager, and Game classes,
-allowing for testing without invoking the actual game logic or requiring real game assets.
 """
 
 import unittest

@@ -2,20 +2,6 @@
 This module provides functions for handling and verifying user input in the Rock-Paper-Scissors
  game.
 
-It includes:
-- `get_user_input_with_verification`: Prompts the user for input, verifies the input based on
- provided options or a custom verification method, and enforces a maximum number of attempts.
-- `verify_user_input`: Validates the user's input against a list of valid options or a custom
- verification function.
-- `verify_positive_integer`: A specific verification method that checks if the input is a positive
- integer.
-
-The module raises the following exceptions:
-- `InvalidInputError`: Raised when the user's input does not match the expected options or fails
- verification.
-- `MaxAttemptsExceededError`: Raised when the user exceeds the maximum allowed number of attempts
- to provide valid input.
-
 These functions are designed to provide robust user input handling and validation for various
  game-related interactions.
 """

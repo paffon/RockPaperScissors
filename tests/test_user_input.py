@@ -1,28 +1,6 @@
 """
 This module contains unit tests for the user input handling functions in the
  Rock-Paper-Scissors game.
-
-The tests cover:
-- The `get_user_input_with_verification` function, which prompts the user for input and verifies
- it.
-  - Ensures valid inputs are handled correctly.
-  - Tests behavior when invalid inputs are followed by valid ones.
-  - Ensures the function raises a `MaxAttemptsExceededError` when the user exceeds the allowed
-   number of attempts.
-  - Verifies input validation when provided with options or a custom verification method (like
-   `verify_positive_integer`).
-
-- The `verify_user_input` function, which checks whether the user's input matches valid options or
- passes a custom verification function.
-  - Tests input validation with and without options.
-  - Ensures proper exception handling for invalid inputs.
-
-- The `verify_positive_integer` function, which verifies whether the input is a valid positive
- integer.
-  - Tests various inputs, including valid integers, negative numbers, non-integer strings, and
-   special characters.
-
-Mocks are used to simulate user input and validate the function behavior under different scenarios.
 """
 
 import unittest

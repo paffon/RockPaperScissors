@@ -1,14 +1,7 @@
 """
 This module contains unit tests for the AssetManager class, which is responsible for
 managing and retrieving assets in the Rock-Paper-Scissors game.
-
-The tests cover the following scenarios:
-- Verifying that the AssetManager correctly retrieves the content of an existing file.
-- Ensuring that an empty string is returned when the specified file does not exist.
-
-Mocks are used to simulate file reading behavior to avoid actual file system operations.
 """
-
 
 import unittest
 from unittest.mock import patch, mock_open

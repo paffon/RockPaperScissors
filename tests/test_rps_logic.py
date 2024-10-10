@@ -1,17 +1,5 @@
 """
 This module contains unit tests for the RPSLogic class in the Rock-Paper-Scissors game.
-
-The tests cover the following scenarios:
-- Initializing the RPSLogic class with valid input files (JSON for weapon names and CSV for
- relationships).
-- Handling invalid input data during initialization, ensuring ConfigurationError is raised when
- validation fails.
-- Testing the `compare` method, which determines the result of a Rock-Paper-Scissors round.
-- Simulating a FileNotFoundError when the necessary configuration files are missing during
- initialization.
-
-Mocks are used to simulate file reading (JSON and CSV) and to validate input, allowing the logic to
- be tested in isolation without relying on actual files.
 """
 
 import unittest

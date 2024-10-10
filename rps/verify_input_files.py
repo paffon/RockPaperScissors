@@ -3,15 +3,6 @@ This module provides utility functions for validating configuration files, speci
 ensuring that short names and relationship mappings are correctly formatted and contain no
 duplicates or invalid entries.
 
-The module offers the following validation functions:
-- `assert_no_duplicates`: Ensures no duplicate entries exist in a list.
-- `assert_all_included`: Ensures all elements from one list are present in another.
-- `validate_short_names`: Validates that short names do not duplicate and are not reused as full
- names.
-- `validate_relationship`: Ensures that the relationship DataFrame between game elements is
- consistent.
-- `validate_config_files_input`: Validates the short names and relationship DataFrame as a whole.
-
 These functions are primarily used to check configuration files for a game or system where
 short names and relationships between items are crucial.
 """

@@ -1,17 +1,8 @@
 """
-This module provides the AssetManager class, which is responsible for managing and retrieving assets
-from a specified folder. The default asset folder is set to '../assets', relative to the script's
-location.
-
-The module includes the following functionality:
-- Initializing the asset manager with a default asset directory.
-- Retrieving the content of an asset file by its filename.
-
-Usage:
-    Create an instance of AssetManager and call the get_asset() method with the filename to retrieve
-    the content of the file.
+This module provides the AssetManager class, which is responsible for managing and retrieving
+assets from a specified folder. The default asset folder is set to 'assets', relative to the
+script's location.
 """
-
 
 import os
 
@@ -19,7 +10,7 @@ import os
 class AssetManager:
     """
     AssetManager is responsible for managing and retrieving assets from a specified asset folder.
-    The asset folder is assumed to be located at '../assets' relative to the script's location.
+    The asset folder is assumed to be located at 'assets' relative to the script's location.
 
     Attributes:
         assets_dir (str): The path to the folder containing assets.

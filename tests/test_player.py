@@ -3,14 +3,6 @@ This module contains unit tests for the Player classes in the Rock-Paper-Scissor
 - The abstract `Player` class.
 - The `HumanPlayer` class.
 - The `ComputerPlayer` class.
-
-The tests cover:
-- Initialization of each class to ensure proper attribute setup.
-- The behavior of the `choose` method for each player type (using mocked strategies).
-- Ensuring that strategies are correctly assigned and executed for both human and computer players.
-
-Mocks are used to simulate the game logic and player strategies, allowing isolated testing of the
- Player classes.
 """
 
 

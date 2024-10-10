@@ -4,19 +4,6 @@ This module contains unit tests for the strategy classes in the Rock-Paper-Sciss
 - The abstract `Strategy` base class.
 - The `RandomStrategy` class, which selects a weapon randomly.
 - The `UserInputStrategy` class, which allows a user to input their weapon choice.
-
-The tests cover:
-- Ensuring that the `Strategy` abstract class cannot be instantiated and requires the `execute`
- method to be implemented.
-- The initialization and execution of the `RandomStrategy`, verifying that a random weapon is
- chosen.
-- The initialization and execution of the `UserInputStrategy`, checking that user input is properly
- handled and validated.
-- Handling of exceptions in the `UserInputStrategy`, such as when the maximum number of attempts is
- exceeded.
-
-Mocks are used to simulate random choices and user input to isolate the behavior of the strategy
- classes from external dependencies.
 """
 
 import unittest

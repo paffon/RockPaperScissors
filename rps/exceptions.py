@@ -2,13 +2,6 @@
 This module defines custom exception classes used for handling various error conditions
 in a game or configuration system.
 
-The exceptions include:
-- ConfigurationError: Raised when there is an issue with the system configuration.
-- InvalidInputError: Raised when user input is considered invalid.
-- MaxAttemptsExceededError: Raised when a user exceeds the maximum allowed input attempts.
-- FailedWeaponChoiceException: Raised when the user fails to make a valid weapon choice.
-- FailedGameException: Raised when the game encounters an error and cannot complete successfully.
-
 These exceptions are used to handle specific failure cases and ensure more informative error
  handling throughout the application.
 """
