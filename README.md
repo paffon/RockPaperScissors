@@ -7,7 +7,7 @@ This is a Python implementation of the classic Rock-Paper-Scissors game, designe
 - `rps/`: Contains the main game code, including classes for game logic, players, strategies, and user input handling.
 - `assets/`: Contains text files used by the game, such as the game title.
 - `data/`: Contains configuration files, including weapon relationships and names.
-- `tests_and_config_verification/`: Contains unit tests and input file verification scripts.
+- `tests/`: Contains unit tests and input file verification scripts.
 - `requirements.txt`: Lists the Python dependencies required to run the project.
 - `Dockerfile`: Defines the Docker image for containerizing the application.
 - `README.txt`: This file.
