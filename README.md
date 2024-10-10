@@ -7,14 +7,14 @@ This is a Python implementation of the classic Rock-Paper-Scissors game, designe
 - `rps/`: Contains the main game code, including classes for game logic, players, strategies, and user input handling.
 - `assets/`: Contains text files used by the game, such as the game title.
 - `data/`: Contains configuration files, including weapon relationships and names.
-- `tests_and_config_verification/`: Contains unit tests and input file verification scripts.
+- `tests/`: Contains unit tests and input file verification scripts.
 - `requirements.txt`: Lists the Python dependencies required to run the project.
 - `Dockerfile`: Defines the Docker image for containerizing the application.
 - `README.txt`: This file.
 
 ## Decisions
 
-1. **Explicit Relationships**: Instead of a cyclic implementation, explicit relationships between rock, paper, and scissors are used. This design allows for easy addition of new weapons and special relationships in future development.
+1. **Explicit Relationships**: Instead of a cyclic implementation (where each element in [r,p,s] beats the one to its left), explicit relationships between rock, paper, and scissors are defined in a csv. This design allows for easy addition of new weapons and special relationships in future development.
 2. **Containerization**: The application is containerized using Docker to ensure consistency across different environments and to simplify deployment.
 
 ## Setup and Running the Game
