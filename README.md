@@ -68,3 +68,6 @@ pytest tests
 - **Game Statistics:** Provide end-of-game statistics such as choices made and player weaknesses.
 - **Logging:** Replace print statements with a logging system for better message control and to facilitate muting in test environments.
 - **User-Friendly Errors:** Refine error messages to be more user-friendly rather than developer-oriented.
+
+---
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/paffon/RockPaperScissors)
