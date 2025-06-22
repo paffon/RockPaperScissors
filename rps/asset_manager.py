@@ -21,7 +21,9 @@ class AssetManager:
         Initializes the AssetManager by setting the asset folder path.
         The asset folder is located at '../assets'.
         """
-        self.assets_dir = 'assets'
+        # Resolve the assets directory relative to this file so that assets are
+        # found correctly even when the current working directory differs.
+        self.assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')
 
     def get_asset(self, filename: str) -> str:
         """
